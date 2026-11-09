@@ -99,6 +99,21 @@ Open http://localhost:3000. There is nothing to configure — the app starts in
 Commons still once into `data/archive-cache`; later films reuse those files, so
 re-renders are faster and lighter on Wikimedia.
 
+### Deploy it
+
+The app needs `ffmpeg`, a writable data directory and renders that run for
+10–25 minutes, so it wants a container host rather than a serverless platform.
+
+```bash
+docker build -t docustudio .
+docker run -p 3000:3000 docustudio
+```
+
+The included `Dockerfile` installs ffmpeg and `edge-tts`, builds the production
+bundle and runs as an unprivileged user. On Hugging Face Spaces use the Docker
+SDK with `app_port: 3000`. Renders live in `data/` and `public/generated/`; on a
+host without a persistent volume they are lost when the instance restarts.
+
 ### Optional: Gemini boost
 
 Add `GEMINI_API_KEY` to `.env` (never commit it). The smart director then writes
