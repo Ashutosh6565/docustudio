@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.env
+.env.local
+public/generated/
+data/
+*.log
+next-env.d.ts
+tsconfig.tsbuildinfo
+tmpfree/
+tmp_check/
+public/legacy-veo/
